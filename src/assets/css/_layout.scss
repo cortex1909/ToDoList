@@ -22,10 +22,68 @@ header {
 }
 
 .container {
-  width: 70%;
+  width: 90%;
   margin: 0 auto;
   background-color: #7786a7;
   padding: 35px 0;
+  display: grid;
+  grid-template-areas: 'aside main';
+  grid-template-columns: max-content auto;
+  aside {
+    height: calc(100vh - (100px + 35px + 70px + 40px));
+    grid-area: aside;
+    border-right: 5px double #2e416f;
+    background-color: #627091;
+    padding: 20px 20px;
+    ul {
+      li {
+        border: 1px solid #2e416f;
+        border-radius: 5px;
+        padding: 5px 10px;
+        margin: 10px 0;
+        display: flex;
+        align-items: center;
+        justify-content: space-around;
+        a {
+          color: white;
+          text-decoration: none;
+          text-transform: capitalize;
+        }
+      }
+    }
+  }
+  main {
+    grid-area: main;
+    height: calc(100vh - (100px + 35px + 70px + 40px));
+    background-color: #627091;
+    padding: 20px 20px;
+    table {
+      width: 80%;
+      margin: 10px auto;
+      th {
+        color: white;
+        font-size: 1.2rem;
+        font-weight: bold;
+        border: 3px solid #2e416f;
+        padding: 5px 0;
+      }
+      tbody {
+        tr {
+          color: white;
+          font-size: 1.2rem;
+          text-align: center;
+          border: 2px solid #2e416f;
+          line-height: 2rem;
+          td {
+            padding: 5px 0;
+            &.biggerFont {
+              font-size: 2rem;
+            }
+          }
+        }
+      }
+    }
+  }
 }
 
 footer {

@@ -1,1 +1,36 @@
 //btns etc
+.deleteBtn {
+  background: transparent;
+  color: red;
+  font-size: 2rem;
+  outline: none;
+  border: none;
+  text-shadow: 1px 1px 5px red;
+}
+.deleteToDoBtn {
+  background: transparent;
+  color: red;
+  font-size: 2rem;
+  outline: none;
+  border: none;
+  text-shadow: 1px 1px 5px red;
+}
+.checkToDoBtn {
+  background: transparent;
+  color: rgb(255, 0, 0);
+  font-size: 2rem;
+  outline: none;
+  border: none;
+  text-shadow: 1px 1px 5px red;
+  &.checked {
+    color: greenyellow;
+    text-shadow: 1px 1px 5px greenyellow;
+  }
+}
+
+.heading {
+  text-align: center;
+  color: white;
+  font-weight: bold;
+  text-transform: uppercase;
+}

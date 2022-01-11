@@ -129,6 +129,45 @@ table {
   border-spacing: 0;
 }
 
+.deleteBtn {
+  background: transparent;
+  color: red;
+  font-size: 2rem;
+  outline: none;
+  border: none;
+  text-shadow: 1px 1px 5px red;
+}
+
+.deleteToDoBtn {
+  background: transparent;
+  color: red;
+  font-size: 2rem;
+  outline: none;
+  border: none;
+  text-shadow: 1px 1px 5px red;
+}
+
+.checkToDoBtn {
+  background: transparent;
+  color: red;
+  font-size: 2rem;
+  outline: none;
+  border: none;
+  text-shadow: 1px 1px 5px red;
+}
+
+.checkToDoBtn.checked {
+  color: greenyellow;
+  text-shadow: 1px 1px 5px greenyellow;
+}
+
+.heading {
+  text-align: center;
+  color: white;
+  font-weight: bold;
+  text-transform: uppercase;
+}
+
 html {
   -webkit-box-sizing: border-box;
           box-sizing: border-box;
@@ -155,10 +194,85 @@ header nav {
 }
 
 .container {
-  width: 70%;
+  width: 90%;
   margin: 0 auto;
   background-color: #7786a7;
   padding: 35px 0;
+  display: -ms-grid;
+  display: grid;
+      grid-template-areas: 'aside main';
+  -ms-grid-columns: max-content auto;
+      grid-template-columns: -webkit-max-content auto;
+      grid-template-columns: max-content auto;
+}
+
+.container aside {
+  height: calc(100vh - (100px + 35px + 70px + 40px));
+  -ms-grid-row: 1;
+  -ms-grid-column: 1;
+  grid-area: aside;
+  border-right: 5px double #2e416f;
+  background-color: #627091;
+  padding: 20px 20px;
+}
+
+.container aside ul li {
+  border: 1px solid #2e416f;
+  border-radius: 5px;
+  padding: 5px 10px;
+  margin: 10px 0;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  -ms-flex-pack: distribute;
+      justify-content: space-around;
+}
+
+.container aside ul li a {
+  color: white;
+  text-decoration: none;
+  text-transform: capitalize;
+}
+
+.container main {
+  -ms-grid-row: 1;
+  -ms-grid-column: 2;
+  grid-area: main;
+  height: calc(100vh - (100px + 35px + 70px + 40px));
+  background-color: #627091;
+  padding: 20px 20px;
+}
+
+.container main table {
+  width: 80%;
+  margin: 10px auto;
+}
+
+.container main table th {
+  color: white;
+  font-size: 1.2rem;
+  font-weight: bold;
+  border: 3px solid #2e416f;
+  padding: 5px 0;
+}
+
+.container main table tbody tr {
+  color: white;
+  font-size: 1.2rem;
+  text-align: center;
+  border: 2px solid #2e416f;
+  line-height: 2rem;
+}
+
+.container main table tbody tr td {
+  padding: 5px 0;
+}
+
+.container main table tbody tr td.biggerFont {
+  font-size: 2rem;
 }
 
 footer {
