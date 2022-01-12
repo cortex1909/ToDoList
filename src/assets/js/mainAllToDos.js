@@ -1,4 +1,5 @@
-import createCustomElement from './createCustomElement'
+import { ProjectList } from './asideAllProjects'
+import Project from './project'
 
 const printHeadNames = () => {
   const tableHeadNames = [
@@ -19,6 +20,31 @@ const printHeadNames = () => {
   theadElement.appendChild(tableRowElement)
 
   return theadElement
+}
+
+export const openProject = (projectID) => {
+  const mainElement = document.createElement('main')
+  const headingElement = document.createElement('div')
+  headingElement.classList.add('heading')
+  headingElement.innerHTML = 'All available projects:'
+  const tableElement = document.createElement('table')
+  tableElement.setAttribute('id', 'toDoTable')
+  mainElement.appendChild(headingElement)
+  mainElement.appendChild(tableElement)
+  tableElement.appendChild(printHeadNames())
+  if (projectID === 'default_project') {
+    tableElement.appendChild(printBody())
+    return mainElement
+  } else {
+    tableElement.appendChild(printBody())
+    return mainElement
+  }
+}
+
+//kreni odavde
+
+export const deleteProject = (projectID) => {
+  console.log(projectID)
 }
 
 const printBody = () => {
@@ -44,21 +70,45 @@ const printBody = () => {
 }
 
 const mainDOM = () => {
+  const defaultID = 'default_project'
+  return openProject(defaultID)
+}
+
+export default mainDOM
+
+/*
+
+    tableRow = document.createElement('td')
+    tableRow.innerHTML = element
+    tableRowElement.appendChild(tableRow)
+    return tableRowElement
+
+*/
+
+/*
+
   const mainElement = document.createElement('main')
-  const headingElement = createCustomElement(
-    'div',
-    'All To Do from ${project.name...}:',
-    {
-      class: 'heading',
-    }
-  )
-  const tableElement = createCustomElement('table', '', { id: 'toDoTable' })
+  const headingElement = document.createElement('div')
+  headingElement.classList.add('heading')
+  headingElement.innerHTML = 'All available projects:'
+  const tableElement = document.createElement('table')
+  tableElement.setAttribute('id', 'toDoTable')
   mainElement.appendChild(headingElement)
   mainElement.appendChild(tableElement)
   tableElement.appendChild(printHeadNames())
   tableElement.appendChild(printBody())
 
-  return mainElement
-}
+*/
 
-export default mainDOM
+/*
+
+  ProjectList.forEach((object) => {
+    if (object.projectID === projectID) {
+      let allTasks = []
+      allTasks = object.tasks
+      console.log(object)
+      // TU SAM STAO!
+    }
+  })
+
+*/

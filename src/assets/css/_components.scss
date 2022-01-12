@@ -34,3 +34,13 @@
   font-weight: bold;
   text-transform: uppercase;
 }
+.project {
+  color: white;
+  background: none;
+  border: none;
+  font-style: italic;
+  font-size: 1.2rem;
+  &:hover {
+    text-decoration: underline;
+  }
+}

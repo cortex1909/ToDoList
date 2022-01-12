@@ -31,5 +31,8 @@
     "url": "https://github.com/cortex1909/ToDoList/issues"
   },
   "homepage": "https://github.com/cortex1909/ToDoList#readme",
-  "description": ""
+  "description": "",
+  "dependencies": {
+    "uniqid": "^5.4.0"
+  }
 }
