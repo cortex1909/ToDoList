@@ -1,13 +1,15 @@
 import Project from './project'
-import { openProject } from './mainAllToDos'
-import { deleteProject } from './mainAllToDos'
+import { mainDOM } from './mainAllToDos'
+import { initialization } from '../../script'
 
 export let ProjectList = []
 
-const asideDOM = () => {
-  createNewProject('Default Project')
+export const createDefaultProjects = () => {
+  createNewProject('Default Project', 'default_project')
   createNewProject('Made Project')
+}
 
+export const asideDOM = () => {
   const asideElement = document.createElement('aside')
   const headingElement = document.createElement('div')
   headingElement.classList.add('heading')
@@ -26,13 +28,21 @@ const asideDOM = () => {
     buttonLinkToProject.classList.add('project')
     buttonLinkToProject.innerHTML = `${project.name}`
     buttonLinkToProject.addEventListener('click', () => {
-      openProject(project.projectID)
+      mainDOM(project.projectID)
     })
     const buttonDeleteProject = document.createElement('button')
     buttonDeleteProject.classList.add('deleteBtn')
     buttonDeleteProject.innerHTML = '&#9746;'
+    if (project.projectID === 'default_project') {
+      buttonDeleteProject.disabled = true
+      buttonDeleteProject.style.color = 'gray'
+      buttonDeleteProject.style.textShadow = '1px 1px 5px gray'
+    }
     buttonDeleteProject.addEventListener('click', () => {
-      deleteProject(project.projectID)
+      ProjectList = ProjectList.filter(
+        (item) => item.projectID != project.projectID
+      )
+      listAllProjectsLI.remove()
     })
     listAllProjectsLI.appendChild(buttonLinkToProject)
     listAllProjectsLI.appendChild(buttonDeleteProject)
@@ -42,13 +52,15 @@ const asideDOM = () => {
   return asideElement
 }
 
-const createNewProject = (projectName) => {
-  const NewProject = Project(projectName)
-  NewProject.createNewTask('Default Task #1', '13.1.2022.', 'high')
+export const createNewProject = (projectName, ID) => {
+  const NewProject = Project(projectName, ID)
+  NewProject.createNewTask(
+    `Project ID ${NewProject.projectID}`,
+    '13.1.2022.',
+    'high'
+  )
   NewProject.createNewTask('Default Task #2', '13.2.2022.', 'med')
   NewProject.createNewTask('Default Task #3', '13.3.2022.', 'low')
   NewProject.createNewTask('Default Task #4', '13.4.2022.', 'no')
   ProjectList.push(NewProject)
 }
-
-export default asideDOM

@@ -1,5 +1,7 @@
+import { initialization } from '../../script'
 import { ProjectList } from './asideAllProjects'
 import Project from './project'
+const mainElement = document.createElement('main')
 
 const printHeadNames = () => {
   const tableHeadNames = [
@@ -22,93 +24,74 @@ const printHeadNames = () => {
   return theadElement
 }
 
-export const openProject = (projectID) => {
-  const mainElement = document.createElement('main')
+export const mainDOM = (projectID = 'default_project') => {
+  const trueMark = `&#9745;`
+  const falseMark = `&#9746;`
+
+  mainElement.innerHTML = ''
   const headingElement = document.createElement('div')
   headingElement.classList.add('heading')
-  headingElement.innerHTML = 'All available projects:'
-  const tableElement = document.createElement('table')
-  tableElement.setAttribute('id', 'toDoTable')
+  headingElement.innerHTML = `All To-Do from project ${
+    projectID === undefined ? '>>Click On Project<<' : projectID
+  }`
   mainElement.appendChild(headingElement)
-  mainElement.appendChild(tableElement)
-  tableElement.appendChild(printHeadNames())
-  if (projectID === 'default_project') {
-    tableElement.appendChild(printBody())
-    return mainElement
-  } else {
-    tableElement.appendChild(printBody())
-    return mainElement
-  }
-}
-
-//kreni odavde
-
-export const deleteProject = (projectID) => {
-  console.log(projectID)
-}
-
-const printBody = () => {
-  const bodyContent = [
-    'To Do Task',
-    '25.12.2021.',
-    '<button class="checkToDoBtn">&#9746;</button>',
-    '<button class="deleteToDoBtn">&#9746;</button>',
-  ]
-
-  const tbodyElement = document.createElement('tbody')
-  const tableRowElement = document.createElement('tr')
-  let tableRow
-  bodyContent.forEach((element) => {
-    tableRow = document.createElement('td')
-    tableRow.innerHTML = element
-    tableRowElement.appendChild(tableRow)
-    return tableRowElement
-  })
-  tbodyElement.appendChild(tableRowElement)
-
-  return tbodyElement
-}
-
-const mainDOM = () => {
-  const defaultID = 'default_project'
-  return openProject(defaultID)
-}
-
-export default mainDOM
-
-/*
-
-    tableRow = document.createElement('td')
-    tableRow.innerHTML = element
-    tableRowElement.appendChild(tableRow)
-    return tableRowElement
-
-*/
-
-/*
-
-  const mainElement = document.createElement('main')
-  const headingElement = document.createElement('div')
-  headingElement.classList.add('heading')
-  headingElement.innerHTML = 'All available projects:'
   const tableElement = document.createElement('table')
-  tableElement.setAttribute('id', 'toDoTable')
-  mainElement.appendChild(headingElement)
-  mainElement.appendChild(tableElement)
   tableElement.appendChild(printHeadNames())
-  tableElement.appendChild(printBody())
+  const tableBody = document.createElement('tbody')
 
-*/
+  const displayProject = ProjectList.filter(
+    (project) => project.projectID === projectID
+  )
+  let displayTasks
+  displayProject.forEach((attribute) => (displayTasks = attribute.tasks))
 
-/*
-
-  ProjectList.forEach((object) => {
-    if (object.projectID === projectID) {
-      let allTasks = []
-      allTasks = object.tasks
-      console.log(object)
-      // TU SAM STAO!
+  displayTasks.forEach((task) => {
+    const tableRow = document.createElement('tr')
+    const tableCellOne = document.createElement('td')
+    tableCellOne.innerHTML = task.taskName
+    const tableCellTwo = document.createElement('td')
+    tableCellTwo.innerHTML = task.taskDate
+    const tableCellThree = document.createElement('td')
+    const isFinishedCheckBtn = document.createElement('button')
+    if (task.isFinished) {
+      isFinishedCheckBtn.classList.add('checkToDoBtn', 'checked')
+      isFinishedCheckBtn.innerHTML = '&#9745;'
+      tableCellThree.appendChild(isFinishedCheckBtn)
+    } else {
+      isFinishedCheckBtn.classList.add('checkToDoBtn')
+      isFinishedCheckBtn.innerHTML = '&#9746;'
+      tableCellThree.appendChild(isFinishedCheckBtn)
     }
+    isFinishedCheckBtn.addEventListener('click', () => {
+      if (task.isFinished) {
+        task.isFinished = false
+        isFinishedCheckBtn.innerHTML = '&#9746;'
+        isFinishedCheckBtn.classList.remove('checked')
+      } else if (!task.isFinished) {
+        task.isFinished = true
+        isFinishedCheckBtn.innerHTML = '&#9745;'
+        isFinishedCheckBtn.classList.add('checked')
+      }
+    })
+    const tableCellFour = document.createElement('td')
+    const deleteToDoBtn = document.createElement('button')
+    deleteToDoBtn.classList.add('deleteToDoBtn')
+    deleteToDoBtn.innerHTML = '&#9746;'
+    tableCellFour.appendChild(deleteToDoBtn)
+    deleteToDoBtn.addEventListener('click', () => {
+      displayTasks = displayTasks.filter((tasks) => tasks != task)
+      tableRow.remove()
+    })
+
+    tableRow.append(tableCellOne)
+    tableRow.append(tableCellTwo)
+    tableRow.append(tableCellThree)
+    tableRow.append(tableCellFour)
+    tableBody.appendChild(tableRow)
+    return tableBody
   })
 
-*/
+  tableElement.appendChild(tableBody)
+  mainElement.appendChild(tableElement)
+  return mainElement
+}
