@@ -93,5 +93,9 @@ export const mainDOM = (projectID = 'default_project') => {
 
   tableElement.appendChild(tableBody)
   mainElement.appendChild(tableElement)
+  const createTaskBtn = document.createElement('button')
+  createTaskBtn.classList.add('createTaskBtn')
+  createTaskBtn.innerHTML = 'Create'
+  mainElement.appendChild(createTaskBtn)
   return mainElement
 }

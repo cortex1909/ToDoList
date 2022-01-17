@@ -49,6 +49,11 @@ export const asideDOM = () => {
     listAllProjectUL.appendChild(listAllProjectsLI)
     return listAllProjectUL
   })
+  const createProjectBtn = document.createElement('button')
+  createProjectBtn.classList.add('createProjectBtn')
+  createProjectBtn.innerHTML = 'Create'
+  createProjectBtn.addEventListener('click', () => {})
+  asideElement.appendChild(createProjectBtn)
   return asideElement
 }
 
