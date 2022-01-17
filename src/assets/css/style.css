@@ -244,10 +244,10 @@ header nav {
 }
 
 .container aside {
-  height: calc(100vh - (100px + 35px + 70px + 40px));
   -ms-grid-row: 1;
   -ms-grid-column: 1;
   grid-area: aside;
+  margin-bottom: 35px;
   border-right: 5px double #2e416f;
   background-color: #627091;
   padding: 20px 20px;
@@ -273,9 +273,9 @@ header nav {
   -ms-grid-row: 1;
   -ms-grid-column: 2;
   grid-area: main;
-  height: calc(100vh - (100px + 35px + 70px + 40px));
   background-color: #627091;
   padding: 20px 20px;
+  margin-bottom: 35px;
 }
 
 .container main table {

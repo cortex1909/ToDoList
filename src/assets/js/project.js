@@ -22,7 +22,11 @@ const Project = (name, default_id) => {
     tasks.push(pushObject)
   }
 
-  return { name, tasks, projectID, createNewTask }
+  const GetID = () => {
+    return projectID
+  }
+
+  return { name, tasks, projectID, createNewTask, GetID }
 }
 
 export default Project

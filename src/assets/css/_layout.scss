@@ -30,8 +30,8 @@ header {
   grid-template-areas: 'aside main';
   grid-template-columns: max-content auto;
   aside {
-    height: calc(100vh - (100px + 35px + 70px + 40px));
     grid-area: aside;
+    margin-bottom: 35px;
     border-right: 5px double #2e416f;
     background-color: #627091;
     padding: 20px 20px;
@@ -49,9 +49,9 @@ header {
   }
   main {
     grid-area: main;
-    height: calc(100vh - (100px + 35px + 70px + 40px));
     background-color: #627091;
     padding: 20px 20px;
+    margin-bottom: 35px;
     table {
       width: 80%;
       margin: 10px auto;

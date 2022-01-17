@@ -6,7 +6,6 @@ export let ProjectList = []
 
 export const createDefaultProjects = () => {
   createNewProject('Default Project', 'default_project')
-  createNewProject('Made Project')
 }
 
 export const asideDOM = () => {
@@ -43,6 +42,7 @@ export const asideDOM = () => {
         (item) => item.projectID != project.projectID
       )
       listAllProjectsLI.remove()
+      initialization()
     })
     listAllProjectsLI.appendChild(buttonLinkToProject)
     listAllProjectsLI.appendChild(buttonDeleteProject)
@@ -52,7 +52,13 @@ export const asideDOM = () => {
   const createProjectBtn = document.createElement('button')
   createProjectBtn.classList.add('createProjectBtn')
   createProjectBtn.innerHTML = 'Create'
-  createProjectBtn.addEventListener('click', () => {})
+  createProjectBtn.addEventListener('click', () => {
+    const projectName = prompt('Enter project name', 'Project name')
+    const NewProject = Project(projectName)
+    ProjectList.push(NewProject)
+    const _projectID = NewProject.GetID()
+    initialization(_projectID)
+  })
   asideElement.appendChild(createProjectBtn)
   return asideElement
 }
@@ -66,6 +72,6 @@ export const createNewProject = (projectName, ID) => {
   )
   NewProject.createNewTask('Default Task #2', '13.2.2022.', 'med')
   NewProject.createNewTask('Default Task #3', '13.3.2022.', 'low')
-  NewProject.createNewTask('Default Task #4', '13.4.2022.', 'no')
+
   ProjectList.push(NewProject)
 }

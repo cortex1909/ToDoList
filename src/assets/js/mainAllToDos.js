@@ -1,6 +1,7 @@
 import { initialization } from '../../script'
 import { ProjectList } from './asideAllProjects'
 import Project from './project'
+import uniqid from 'uniqid'
 const mainElement = document.createElement('main')
 
 const printHeadNames = () => {
@@ -96,6 +97,19 @@ export const mainDOM = (projectID = 'default_project') => {
   const createTaskBtn = document.createElement('button')
   createTaskBtn.classList.add('createTaskBtn')
   createTaskBtn.innerHTML = 'Create'
+  createTaskBtn.addEventListener('click', () => {
+    const array = {
+      projectID: projectID,
+      taskID: uniqid(),
+      taskName: 'Test',
+      taskDate: 'Testuala',
+      priority: 'high',
+      isFinished: true,
+    }
+    displayTasks.push(array)
+    console.log(displayTasks)
+    initialization(projectID)
+  })
   mainElement.appendChild(createTaskBtn)
   return mainElement
 }
