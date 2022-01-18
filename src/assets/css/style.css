@@ -205,6 +205,65 @@ table {
   text-decoration: underline;
 }
 
+.modal {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: column;
+          flex-direction: column;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  background-color: rgba(0, 0, 0, 0.8);
+}
+
+.modal .body {
+  color: white;
+  font-size: 1.3rem;
+  text-align: center;
+}
+
+.modal .body h2 .closeBtn {
+  background: none;
+  color: red;
+  border: none;
+  font-size: 1.5rem;
+}
+
+.modal .body .createTaskBtn {
+  width: 100%;
+  margin-top: 10px;
+}
+
+.modal .body form {
+  margin-top: 20px;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: column;
+          flex-direction: column;
+}
+
+.modal .body form input {
+  margin-bottom: 5px;
+}
+
+.modal .body form .radioChoice {
+  margin-top: 10px;
+}
+
 html {
   -webkit-box-sizing: border-box;
           box-sizing: border-box;

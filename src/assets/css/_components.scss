@@ -67,3 +67,44 @@
     text-decoration: underline;
   }
 }
+
+.modal {
+  display: flex;
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  background-color: rgba(0, 0, 0, 0.8);
+  .body {
+    color: white;
+    font-size: 1.3rem;
+    text-align: center;
+    h2 {
+      .closeBtn {
+        background: none;
+        color: red;
+        border: none;
+        font-size: 1.5rem;
+      }
+    }
+    .createTaskBtn {
+      width: 100%;
+      margin-top: 10px;
+    }
+    form {
+      margin-top: 20px;
+      display: flex;
+      flex-direction: column;
+      input {
+        margin-bottom: 5px;
+      }
+      .radioChoice {
+        margin-top: 10px;
+      }
+    }
+  }
+}

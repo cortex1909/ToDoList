@@ -81,6 +81,11 @@ export const mainDOM = (projectID = 'default_project') => {
     tableCellFour.appendChild(deleteToDoBtn)
     deleteToDoBtn.addEventListener('click', () => {
       displayTasks = displayTasks.filter((tasks) => tasks != task)
+      ProjectList.filter((project) => {
+        if (project.projectID === projectID) {
+          project.tasks = displayTasks
+        }
+      })
       tableRow.remove()
     })
 
@@ -88,6 +93,13 @@ export const mainDOM = (projectID = 'default_project') => {
     tableRow.append(tableCellTwo)
     tableRow.append(tableCellThree)
     tableRow.append(tableCellFour)
+    if (task.priority === 'high') {
+      tableRow.style.backgroundColor = '#f003'
+    } else if (task.priority === 'med') {
+      tableRow.style.backgroundColor = '#ffa5004f'
+    } else if (task.priority === 'low') {
+      tableRow.style.backgroundColor = '#ffff005e'
+    }
     tableBody.appendChild(tableRow)
     return tableBody
   })
@@ -98,18 +110,92 @@ export const mainDOM = (projectID = 'default_project') => {
   createTaskBtn.classList.add('createTaskBtn')
   createTaskBtn.innerHTML = 'Create'
   createTaskBtn.addEventListener('click', () => {
-    const array = {
-      projectID: projectID,
-      taskID: uniqid(),
-      taskName: 'Test',
-      taskDate: 'Testuala',
-      priority: 'high',
-      isFinished: true,
-    }
-    displayTasks.push(array)
-    console.log(displayTasks)
-    initialization(projectID)
+    const modalElement = document.createElement('div')
+    modalElement.classList.add('modal')
+    const modalBody = document.createElement('div')
+    modalBody.classList.add('body')
+    const h2Element = document.createElement('h2')
+    h2Element.innerHTML = `Create New Task for "${projectID}"`
+    const closeBtn = document.createElement('button')
+    closeBtn.classList.add('closeBtn')
+    closeBtn.innerHTML = '&#9746;'
+    modalBody.appendChild(h2Element)
+    h2Element.appendChild(closeBtn)
+    const formElement = document.createElement('form')
+
+    const TaskNameInput = document.createElement('input')
+    TaskNameInput.type = 'text'
+    TaskNameInput.placeholder = 'Name of Task'
+
+    const DueDateInput = document.createElement('input')
+    DueDateInput.type = 'date'
+    DueDateInput.placeholder = 'Due Date'
+
+    formElement.appendChild(TaskNameInput)
+    formElement.appendChild(DueDateInput)
+
+    const radioChoice = document.createElement('div')
+    radioChoice.classList.add('radioChoice')
+
+    const lowPriority = document.createElement('input')
+    lowPriority.type = 'radio'
+    lowPriority.name = 'priorityCheck'
+    lowPriority.value = 'low'
+    const lowPriorityLabel = document.createElement('label')
+    lowPriorityLabel.for = lowPriority
+    lowPriorityLabel.innerHTML = 'Low Priority'
+    radioChoice.appendChild(lowPriority)
+    radioChoice.appendChild(lowPriorityLabel)
+
+    const mediumPriority = document.createElement('input')
+    mediumPriority.type = 'radio'
+    mediumPriority.name = 'priorityCheck'
+    mediumPriority.value = 'med'
+    const mediumPriorityLabel = document.createElement('label')
+    mediumPriorityLabel.for = mediumPriority
+    mediumPriorityLabel.innerHTML = 'Medium Priority'
+    radioChoice.appendChild(mediumPriority)
+    radioChoice.appendChild(mediumPriorityLabel)
+
+    const highPriority = document.createElement('input')
+    highPriority.type = 'radio'
+    highPriority.name = 'priorityCheck'
+    highPriority.value = 'high'
+    const highPriorityLabel = document.createElement('label')
+    highPriorityLabel.for = highPriority
+    highPriorityLabel.innerHTML = 'High Priority'
+    radioChoice.appendChild(highPriority)
+    radioChoice.appendChild(highPriorityLabel)
+    formElement.appendChild(radioChoice)
+
+    const createTask = document.createElement('button')
+    createTask.classList.add('createTaskBtn')
+    createTask.innerHTML = 'Create'
+    modalBody.appendChild(formElement)
+    modalBody.appendChild(createTask)
+    modalElement.appendChild(modalBody)
+    mainElement.appendChild(modalElement)
+
+    closeBtn.addEventListener('click', () => {
+      modalElement.style.display = 'none'
+    })
+    createTask.addEventListener('click', () => {
+      const radioCheck = document.querySelector(
+        'input[name="priorityCheck"]:checked'
+      )
+      const array = {
+        projectID: projectID,
+        taskID: uniqid(),
+        taskName: TaskNameInput.value,
+        taskDate: DueDateInput.value,
+        priority: radioCheck.value,
+        isFinished: false,
+      }
+      displayTasks.push(array)
+      initialization(projectID)
+    })
   })
   mainElement.appendChild(createTaskBtn)
   return mainElement
 }
+//taskName, taskDate, priroity
