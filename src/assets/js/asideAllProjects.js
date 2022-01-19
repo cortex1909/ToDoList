@@ -70,8 +70,8 @@ export const createNewProject = (projectName, ID) => {
     '13.1.2022.',
     'high'
   )
-  NewProject.createNewTask('Default Task #2', '13.2.2022.', 'med')
-  NewProject.createNewTask('Default Task #3', '13.3.2022.', 'low')
+  NewProject.createNewTask('Default Task #2', '2022-31-01.', 'med')
+  NewProject.createNewTask('Default Task #3', '2022-25-02', 'low')
 
   ProjectList.push(NewProject)
 }
